@@ -1,0 +1,98 @@
+header{
+  font-size: 28px;
+  line-height: 25px;
+  text-align:center; 
+  position:absolute;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100px;
+  background-color: lightblue;
+  z-index:1;
+}
+
+#main-container{
+  position:absolute;
+  left:0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgray;
+  min-height:100vh;
+  min-width:100vw;
+}
+
+.game-container{
+  border:1px solid black;
+  min-height:500px;
+  max-height: 500px;
+  margin-top: 30px;
+  min-width: 500px;
+  max-width:500px;
+
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+}
+.square{
+  border:1px solid black;
+  font-size:60px;
+  text-align: center; 
+  line-height: 165px;
+}
+.square:hover{
+  cursor: pointer;
+  background-color: rgba(173, 216, 230, 0.5);
+}
+
+.game-updates{
+  height:60px;
+  line-height: 60px;
+  width:100%;
+  margin-top: 70px;
+  border: 1px solid black;
+  background-color: snow;
+  z-index:1;
+  display:block;
+  text-align: center;
+  font-size: 36px;
+}
+
+.start{
+  width:130px;
+  height:40px;
+  border-radius: 5px;
+  margin-top:10px;
+  background-color:rgb(90, 140, 200);
+  color:white;
+  font-size:24px;
+}
+.start:hover{
+  cursor: pointer;
+  background-color:rgb(80, 130, 180);
+  color:white;
+  
+}
+
+.restart{
+  width:130px;
+  height:40px;
+  border-radius: 5px;
+  margin-top:10px;
+  background-color:rgb(90, 140, 200);
+  color:white;
+  font-size:24px;
+}
+.restart:hover{
+  cursor: pointer;
+  background-color:rgb(80, 130, 180);
+  
+}
+
+.disabled{
+  pointer-events: none;
+}
