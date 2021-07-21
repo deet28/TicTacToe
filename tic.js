@@ -3,13 +3,15 @@ const gameUpdates = document.querySelector('.game-updates');
 
 
 const gamePlay = (() =>{
-  
   let waitingForSecond = false;
+  let array = [];
+  
   var oneTurn = function(e){
     const { target } = e;
       if (waitingForSecond == false){
       if(target.classList.contains("square") && target.textContent == ""){
         target.textContent = "X";
+        array.push("X");
         waitingForSecond = true; 
         turnTeller();
         checkWinner();
@@ -21,6 +23,7 @@ const gamePlay = (() =>{
     if (waitingForSecond == true){
       if (target.classList.contains("square") && target.textContent == ""){
         target.textContent = "O";
+        array.push("O")
         waitingForSecond = false;
         turnTeller();
         checkWinner();
@@ -28,13 +31,22 @@ const gamePlay = (() =>{
     }
   }
   var turnTeller = function(){
-    if (waitingForSecond == false){
-      gameUpdates.textContent = "Player 1's turn!";
+    if (array.length === 9 && !gameContainer.classList.contains("disabled")){
+      console.log(array);
+      gameUpdates.textContent = "It's a draw!";
+      gameContainer.classList.add("disabled");
+      array = []; 
+      console.log(array);
+      return;
+    } else if (waitingForSecond == false && !gameContainer.classList.contains("disabled")){
+        gameUpdates.textContent = "Player 1's turn!";
     } else if (waitingForSecond == true) {
-      gameUpdates.textContent = "Player 2's turn!";
+        gameUpdates.textContent = "Player 2's turn!";
+      }
     }
-  }
+  
   function checkWinner (){
+    
     if (gameContainer.childNodes[0].textContent == gameContainer.childNodes[1].textContent 
       && gameContainer.childNodes[1].textContent == gameContainer.childNodes[2].textContent
       &&!gameContainer.childNodes[0].textContent==""){
@@ -116,14 +128,19 @@ const gamePlay = (() =>{
           gameContainer.classList.add("disabled");
     }
     }
+   
     function changeWaiting(){
       waitingForSecond = false;
+    }
+    var resetArray = function(){
+      array = [];
     }
 
     return {
       oneTurn:oneTurn,
       twoTurn:twoTurn,
-      changeWaiting:changeWaiting
+      changeWaiting:changeWaiting,
+      resetArray:resetArray
     }
 })();
 
@@ -133,7 +150,7 @@ const gameBoard = (() => {
   const startButton = document.querySelector('#button');
   startButton.textContent = "Start";
   startButton.classList.add("start");
-  gameUpdates.textContent = "Press start to play!";
+  gameUpdates.textContent = "Press start to play";
   gameContainer.classList.add("disabled");
   
   function _makeSquares(){
@@ -171,8 +188,10 @@ const gameBoard = (() => {
         startButton.textContent = "Start";
         startButton.classList.remove("restart");
         startButton.classList.add("start");
+        gamePlay.resetArray();
       }
    }
+   
       startButton.addEventListener('click',startGame);
 
       return {
@@ -182,6 +201,7 @@ const gameBoard = (() => {
 })();
 
 gameBoard.makeBoard();
+
 
 
 
